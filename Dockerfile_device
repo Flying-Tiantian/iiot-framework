@@ -1,0 +1,5 @@
+FROM sdp-platform
+
+COPY ./SDPSource /home/SDPSource
+CMD [ "/home/SDPSource/run_device.sh" ]
+ENTRYPOINT [ "/bin/sh" ]

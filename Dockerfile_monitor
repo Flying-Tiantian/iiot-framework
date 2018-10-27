@@ -1,0 +1,7 @@
+FROM sdp-platform
+
+COPY ./SDPSource /home/SDPSource
+WORKDIR /home/SDPSource/hbmqtt/
+RUN python3 setup.py install
+CMD [ "/home/SDPSource/run_monitor.sh" ]
+ENTRYPOINT [ "/bin/sh" ]

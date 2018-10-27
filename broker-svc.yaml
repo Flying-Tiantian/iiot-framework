@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt-broker
+spec:
+  type: NodePort
+  ports:
+    - port: 5555
+      targetPort: 5555
+      nodePort: 32225
+  selector:
+    app: sdp-controller

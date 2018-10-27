@@ -1,0 +1,8 @@
+*.egg-info
+*.pyc
+.idea/hbmqtt.iml
+.tox/
+__pycache__
+build/
+dist/
+tests/plugins/test.db

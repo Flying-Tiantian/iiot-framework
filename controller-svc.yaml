@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sdp-controller
+spec:
+  type: NodePort
+  ports:
+    - port: 2222
+      targetPort: 2222
+      nodePort: 32222
+  selector:
+    app: sdp-controller

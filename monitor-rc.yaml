@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: sdp-monitor
+spec:
+  replicas: 5
+  selector:
+    app: sdp-monitor
+  template:
+    metadata:
+      name: sdp-monitor
+      labels:
+        app: sdp-monitor
+    spec:
+      containers:
+      - name: sdp-monitor
+        image: sdp-monitor
+        imagePullPolicy: Never
+        securityContext: 
+          privileged: true  #  to enable firewall
+        ports:
+        - containerPort: 4444
+        readinessProbe:
+          tcpSocket:
+            port: 4444
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        env:
+        - name: XTABLES_LIBDIR
+          value: '/usr/lib/xtables/'
+        - name: M_SDP_TEST
+          value: "True"
+        - name: M_SDP_CONTROLLER_ADDRESS
+          value: 'sdp-controller'
+        - name: M_MQTT_BROKER_ADDRESS
+          value: 'mqtt-broker'
+        - name: M_SDP_LOG_LEVEL
+          value: "DEBUG"

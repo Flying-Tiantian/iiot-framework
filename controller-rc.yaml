@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: sdp-controller
+spec:
+  replicas: 1
+  selector:
+    app: sdp-controller
+  template:
+    metadata:
+      name: sdp-controller
+      labels:
+        app: sdp-controller
+    spec:
+      containers:
+      - name: sdp-controller
+        image: sdp-controller
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 2222
+        env:
+        - name: M_SDP_TEST
+          value: "True"
+        - name: M_SDP_LOG_LEVEL
+          value: "DEBUG"

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: sdp-device
+spec:
+  replicas: 2
+  selector:
+    app: sdp-device
+  template:
+    metadata:
+      name: sdp-device
+      labels:
+        app: sdp-device
+    spec:
+      containers:
+      - name: sdp-device
+        image: sdp-device
+        imagePullPolicy: Never
+        securityContext: 
+          privileged: true  #  to enable firewall
+        env:
+        - name: XTABLES_LIBDIR
+          value: '/usr/lib/xtables/'
+        - name: M_SDP_TEST
+          value: "True"
+        - name: M_SDP_MONITOR_ADDRESS
+          value: 'sdp-monitor'
+        - name: M_SDP_LOG_LEVEL
+          value: "DEBUG"
